@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+    
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+#addTaskButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#addTaskButton:hover {
+    background-color: green;
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+#taskList li {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    color: grey;
+    background-color: #e9e9e9;
+}
+
+.task-actions button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.task-actions button:hover {
+    background-color: red;
+}
+
+.task-actions .complete-button {
+    background-color: blue;
+}
+
+.task-actions .complete-button:hover {
+    background-color: blue;
+}
+</style>
+
+
+
+</head>
+
+
+<body>
+    <div class="container">
+        <h1>Lista de tareas</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Añade una nueva tarea...">
+            <button id="addTaskButton">Añadir</button>
+        </div>
+        <ul id="taskList">
+            </ul>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const taskInput = document.getElementById('taskInput');
+    const addTaskButton = document.getElementById('addTaskButton');
+    const taskList = document.getElementById('taskList');
+
+    // Función para añadir una nueva tarea
+    addTaskButton.addEventListener('click', addTask);
+    taskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+
+    function addTask() {
+        const taskText = taskInput.value.trim(); 
+        if (taskText === '') {
+            alert('Por favor, ingresa una tarea.');
+            return;
+        }
+
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <span>${taskText}</span>
+            <div class="task-actions">
+                <button class="complete-button">Completar</button>
+                <button class="delete-button">Eliminar</button>
+            </div>
+        `;
+
+        taskList.appendChild(listItem);
+        taskInput.value = '';
+
+        
+        const completeButton = listItem.querySelector('.complete-button');
+        completeButton.addEventListener('click', () => {
+            listItem.classList.toggle('completed'); 
+        });
+
+        
+        const deleteButton = listItem.querySelector('.delete-button');
+        deleteButton.addEventListener('click', () => {
+            taskList.removeChild(listItem);
+        });
+    }
+});
+
+
+
+
+    </script>
+
+
+
+
+
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botonera sonidos en la ciudad</title>
+
+<style>
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightblue;
+        }
+
+        h1 {
+            color: black;
+            margin-bottom: 40px;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .botonera {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 300px;
+        }
+
+        .boton-sonido {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .boton-sonido:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .boton-sonido:active {
+            transform: translateY(1px);
+        }
+
+        #boton1 {
+            background-color:blue;
+            color: white;
+        }
+
+        #boton2 {
+            background-color: blue;
+            color: white;
+        }
+
+        #boton3 {
+            background-color: blue;
+            color: white;
+        }
+
+        #boton4 {
+            background-color: blue;
+            color: white;
+        }
+    
+
+</style>
+</head>
+
+<body>
+<h1>Sonidos en la ciudad</h1>
+
+<div class=" botonera">
+
+<button id="boton1" class="boton-sonido" style="opacity: 1;">Aviones</button>
+<button id="boton2" class="boton-sonido" style="opacity: 1;">Bocinas</button>
+<button id="boton3" class="boton-sonido" style="opacity: 1;">Obras</button>
+<button id="boton4" class="boton-sonido" style="opacity: 1;">Subte</button>
+
+</div>
+
+<script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const audio1 = new Audio('bbc_aircraft--_07069029.mp3');
+            const audio2 = new Audio('bbc_cars--horn_07063139.mp3');
+            const audio3 = new Audio('bbc_coal-minin_07075064.mp3');
+            const audio4 = new Audio(" bbc_trains--di_07071153.mp3 ");
+
+
+            
+            const boton1 = document.getElementById('boton1');
+            const boton2 = document.getElementById('boton2');
+            const boton3 = document.getElementById('boton3');
+            const boton4 = document.getElementById('boton4');
+
+
+           
+            const audios = [audio1, audio2, audio3, audio4];
+            const botonesArr = [boton1, boton2, boton3, boton4];
+
+            botonesArr.forEach((boton, i) => {
+                boton.addEventListener('click', function () {
+                    audios[i].currentTime = 0;
+                    audios[i].play();
+                });
+            });
+
+
+            // Opcional: agregar efecto visual al presionar
+            const botones = document.querySelectorAll('.boton-sonido');
+            botones.forEach(boton => {
+                boton.addEventListener('mousedown', function () {
+                    this.style.opacity = '0.8';
+                });
+
+                boton.addEventListener('mouseup', function () {
+                    this.style.opacity = '1';
+                });
+
+                boton.addEventListener('mouseleave', function () {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+    
+
+
+
+</script>
+
+
+    
+</body>
+
+
+</html>
